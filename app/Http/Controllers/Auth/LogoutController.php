@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Controller;
 use App\Http\Resources\ReservationResource;
 use App\Models\Office;
 use App\Models\Reservation;
@@ -33,6 +34,5 @@ class LogoutController extends Controller
         } else {
             // Revoke token
         }
-
     }
 }

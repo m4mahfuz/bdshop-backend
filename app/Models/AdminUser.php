@@ -8,15 +8,21 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class AdminUser extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
- 
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
     protected $fillable = [
         'name',
         'phone',
         'email',
         'password',
+        'type_id'
     ];
 
     protected $hidden = [
@@ -28,9 +34,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function roles()
+
+    public function type()
     {
-        return $this->belongsToMany(Role::class); 
+        return $this->belongsTo(Type::class);
     }
 
 }

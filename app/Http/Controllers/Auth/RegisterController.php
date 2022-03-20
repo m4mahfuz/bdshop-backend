@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Controller;
 use App\Http\Resources\ReservationResource;
 use App\Models\Office;
 use App\Models\Reservation;
@@ -28,12 +29,14 @@ class RegisterController extends Controller
     {
         request()->validate([
             'name' => ['required', 'string', 'max:255'],
+            'phone' => ['required', 'string', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed'],
         ]);
 
         $user = User::create([
             'name' => request('name'),
+            'phone' => request('phone'),
             'email' => request('email'),
             'password' => Hash::make(request('password')),
         ]);

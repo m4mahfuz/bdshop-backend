@@ -13,7 +13,7 @@ class TypeFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->numberBetween(1, 3)
+            'name' => $this->faker->unique()->words(1, true)
         ];
     }
 }

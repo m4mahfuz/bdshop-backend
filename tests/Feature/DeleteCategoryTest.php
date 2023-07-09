@@ -26,7 +26,7 @@ it('should delete a category', function () {
    $category = Category::factory()->create();
 
    actingAs($this->adminUser)->
-       deleteJson(route('categories.destroy', ['category' => $category->id])
+       deleteJson(route('categories.destroy', ['category' => $category->slug])
         )->assertStatus(Response::HTTP_NO_CONTENT);
 
    $this->assertDatabaseCount('categories', 0);
@@ -41,7 +41,7 @@ it('should set category_id of products to null on delete category', function() {
 
     actingAs($this->adminUser)->
         deleteJson(
-            route('categories.destroy', ['category' => $category->id])
+            route('categories.destroy', ['category' => $category->slug])
         )->assertStatus(Response::HTTP_NO_CONTENT);
              
     

@@ -37,6 +37,22 @@ return [
         'database' => [
             'driver' => 'database',
             'table' => 'jobs',
+            'queue' => 'sms',
+            'retry_after' => 90,
+            'after_commit' => false,
+        ],
+
+        'database' => [
+            'driver' => 'database',
+            'table' => 'jobs',
+            'queue' => 'email',
+            'retry_after' => 90,
+            'after_commit' => true,
+        ],
+
+        'database' => [
+            'driver' => 'database',
+            'table' => 'jobs',
             'queue' => 'default',
             'retry_after' => 90,
             'after_commit' => false,

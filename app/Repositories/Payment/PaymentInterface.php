@@ -1,0 +1,27 @@
+<?php
+
+namespace App\Repositories\Payment;
+
+interface PaymentInterface {
+	
+	public function initiateGWPayment(array $data);
+    
+    public function initiateRefund(array $data);
+
+    // public function orderValidate($trxID, $amount, $currency, $requestData);
+
+    // public function setParams($data);
+
+    // public function setRequiredInfo(array $data);
+
+    // public function setCustomerInfo(array $data);
+
+    // public function setShipmentInfo(array $data);
+
+    // public function setProductInfo(array $data);
+
+    // public function setAdditionalInfo(array $data);
+
+    // public function callToApi($data, $header = [], $setLocalhost = false);
+	
+}

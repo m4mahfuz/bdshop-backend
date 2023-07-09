@@ -7,12 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Type extends Model
 {
-    use HasFactory;
+    use HasFactory;    
 
     protected $fillable = ['name'];
-
+    
     public function admins()
     {
         return $this->hasMany(AdminUser::class);
     }
+
+    public function invites()
+    {
+        return $this->hasMany(Invite::class);
+    }
+    
 }

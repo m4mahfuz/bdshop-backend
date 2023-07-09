@@ -55,6 +55,7 @@ return [
     */
 
     'url' => env('APP_URL', 'http://localhost'),
+    'client_url' => env('APP_CLIENT_URL'),
 
     'asset_url' => env('ASSET_URL'),
 
@@ -69,7 +70,8 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    // 'timezone' => 'UTC',
+    'timezone' => 'Asia/Dhaka',
 
     /*
     |--------------------------------------------------------------------------
@@ -167,6 +169,9 @@ return [
         /*
          * Package Service Providers...
          */
+        Intervention\Image\ImageServiceProvider::class,
+        Milon\Barcode\BarcodeServiceProvider::class,
+
 
         /*
          * Application Service Providers...
@@ -176,6 +181,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Repositories\BackendServiceProvider::class,
 
     ],
 
@@ -192,6 +198,10 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // ...
+        'Image' => Intervention\Image\Facades\Image::class,
+        // ...
+        'DNS1D' => Milon\Barcode\Facades\DNS1DFacade::class,
+        'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
     ])->toArray(),
 
 ];

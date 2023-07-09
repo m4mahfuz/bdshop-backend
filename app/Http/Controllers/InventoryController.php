@@ -2,62 +2,64 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreInventoryRequest;
+use App\Http\Resources\InventoryResource;
+use App\Models\Inventory;
+use App\Services\InventoryService;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class InventoryController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+{    
+    private $inventory;
+
+    public function __construct(InventoryService $inventory)
+    {
+        $this->middleware([
+            'auth',
+            'role:super_admin,admin'
+        ]);//->except('index', 'show');        
+
+        $this->inventory = $inventory;
+    }
     public function index()
     {
-        //
-    }
+        $inventories = Inventory::with([
+            'product:id,name,slug,price',
+            // 'discount.deduct'
+        ])->get();
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+        return [
+            'data' => InventoryResource::collection($inventories),
+        ];
     }
+    
+    // public function store(Request $request)
+    // {
+        
+    // }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    
+    public function show(Inventory $inventory)
     {
-        //
+        return [
+            'data' => Inventory::make($inventory->load([
+                    'product',
+                    // 'discount.deduct'
+                ])
+            )
+        ];
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    
+    public function update(StoreInventoryRequest $request, Inventory $inventory)
     {
-        //
+        return response([
+            'data' => InventoryResource::make($this->inventory->update($request, $inventory))
+        ], Response::HTTP_OK);
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+    
+    // public function destroy($id)
+    // {
+    //     //
+    // }
 }

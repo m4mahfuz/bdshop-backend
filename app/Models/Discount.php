@@ -15,4 +15,14 @@ class Discount extends Model
         return $this->morphOne(Deduct::class, 'deductable');
     }    
 
+    public function categories()
+    {
+        return $this->hasMany(Category::class);
+    }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
 }

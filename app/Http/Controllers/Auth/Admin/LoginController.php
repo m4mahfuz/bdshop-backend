@@ -17,6 +17,8 @@ class LoginController extends Controller
             'password' => ['required'],
         ]);
 
+        $credentials['active'] = true;
+        
         /**
          * We are authenticating a request from our frontend.
          */

@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Discount;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,9 +18,14 @@ class CategoryFactory extends Factory
      */
     public function definition()
     {
+        $name = $this->faker->unique()->words(1, true);
+
         return [
-            'name' => $this->faker->words(5, true),
-            'description' => $this->faker->paragraph(3),
+            'name' => ucfirst($name),
+            'slug' => Str::slug($name),
+            'description' => $this->faker->paragraph(2),
+            'parent_id' => null,
+            'discount_id' => fn () => Discount::factory()->create()->id,
         ];
     }
 }

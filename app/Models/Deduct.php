@@ -8,7 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Deduct extends Model
 {
     use HasFactory;
-    protected $guarded = [];
+    protected $guarded = [];    
+    protected $casts = [
+        'active' => 'boolean',
+        // 'starting' => 'date',
+        // 'ending' => 'date'
+    ];
+
 
     public function deductable()
     {

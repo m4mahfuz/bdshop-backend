@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Models\AdminUser;
+use App\Models\Admin;
 use App\Models\Type;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Symfony\Component\HttpFoundation\Response;

@@ -2,22 +2,21 @@
 
 namespace Database\Factories;
 
+use App\Models\Deduct;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Deduct>
- */
+
 class DeductFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition()
     {
-        return [
-            //
+        return [                        
+            'amount' => $this->faker->randomDigitNotNull(),
+            'active' => true,
+            // 'minimum_spending' => 500,
+            'limit' => null,
+            'starting' => now()->subDays(3),
+            'ending' => now()->addDays(4)
         ];
     }
 }

@@ -68,3 +68,12 @@ Artisan::command('create:superadmin', function () {
         }    
     }
 })->describe('Create Super Admin if not exists');
+
+
+Artisan::command('log:clear', function() {
+    if ($this->confirm('Do you wish to continue?')) {
+        exec('echo "" > ' . storage_path('logs/laravel.log'));
+        $this->info('Logs have been cleared');
+        // $this->comment('Logs have been cleared!');
+    }
+})->describe('Clear Laravel log');

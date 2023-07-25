@@ -3,14 +3,6 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
-
-// header('Access-Control-Allow-Origin: *');
-// header('Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE');
-// header('Access-Control-Allow-Headers: Content-Type, X-Auth-Token, Origin, Authorization');
-
 
 use App\Http\Controllers\{
     Auth\Admin\LoginController as AdminLoginController,    
@@ -282,62 +274,3 @@ Route::get('/search/items', [ProductSearchController::class, 'index']);
 //Slides
 Route::apiResource('/slides', SlideController::class);
 
-Route::get('/session', function(Request $request){
-    
-    return response()->json([
-        // $request->key => $request->session()->get($request->key),
-        // 'session' => $request->session()->all(),
-        'session' => session()->all(),
-        // 'user' => auth()->user(), //$request->user(),
-    ]);
-});
-Route::post('/session', function(Request $request){
-    
-    $request->session()->put($request->key, $request->value);
-
-    return response()->json([
-        $request->key => $request->session()->get($request->key)
-    ]);
-});
-Route::post('/clear', function(Request $request){
-    $request->session()->forget($request->key);
-
-    return response()->json([
-       'message' => "Session Cleared for {$request->key}"
-    ]);
-});
-Route::get('/cc', function(){
-    var_dump(session()->all());
-    dd(\Illuminate\Support\Facades\Session::get('starting'));
-    // session()->flush();
-    return 'ss flushed';
-});
-
-// Route::get('/myorders', function() {
-//     return $orders = \App\Models\Order::query()
-//              ->where('created_at', '>=', \Carbon\Carbon::now()->subDay())->get();
-
-// });
-Route::get('/myorders', function() {
-
-// $startDateTime = \Carbon\Carbon::now()->subDay(); // Calculate the start datetime
-
-// return $orders = \App\Models\Order::select(
-//         \App\Models\Order::raw('COUNT(id) as total_orders'),
-//         \App\Models\Order::raw('HOUR(created_at) as hour')
-//     )
-//     ->where('created_at', '>', $startDateTime)
-//     ->groupBy('hour')
-//     ->orderBy('hour', 'asc')
-//     ->get();
-
-// return $orders = \App\Models\Order::selectRaw('HOUR(created_at) as hour, COUNT(*) as total_orders')
-//     ->where('created_at', '>', \Carbon\Carbon::now()->subHours(24))
-//     ->groupByRaw('HOUR(created_at)')
-//     ->get();
-return $orders = \App\Models\Order::selectRaw("DATE_FORMAT(created_at, '%h %p') as hour, COUNT(*) as total_orders")
-    ->where('created_at', '>', \Carbon\Carbon::now()->subHours(24))
-    ->groupByRaw("DATE_FORMAT(created_at, '%h %p')")
-    ->get();
-
-});

@@ -111,7 +111,7 @@ class OfferController extends Controller
         ], Response::HTTP_CREATED);
     }
 
-    public function update(StoreOfferRequest $request, Offer $offer)
+    public function update(Offer $offer, StoreOfferRequest $request)
     {        
         return response([
             'data' => OfferResource::make($this->offer->update($request, $offer))

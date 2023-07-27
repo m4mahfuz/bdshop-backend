@@ -34,7 +34,7 @@ class DailyDealController extends Controller
         $deals = DailyDeal::with([
             'product.featuredImage',
             // 'product.dailyDeal'
-        ])->orderBy('id')->cursorPaginate(10);
+        ])->orderBy('id', 'desc')->cursorPaginate(10);
                 
         // // return [
         // //     'data' => DailyDealResource::collection($deals),

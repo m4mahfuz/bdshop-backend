@@ -28,7 +28,7 @@ class WeeklyDealController extends Controller
 
         $deals = WeeklyDeal::with([
             'product.featuredImage',
-        ])->orderBy('id')->cursorPaginate(10);
+        ])->orderBy('id', 'desc')->cursorPaginate(10);
                 
         return (new WeeklyDealCollection($deals))->additional(
             [

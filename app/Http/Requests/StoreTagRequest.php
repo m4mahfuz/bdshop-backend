@@ -8,7 +8,26 @@ use Illuminate\Validation\Rule;
 
 class StoreTagRequest extends FormRequest
 {      
+    public function getActive(): bool
+    {
+        return $this->active;
+    }
     
+    public function getName(): string
+    {
+        return $this->name;
+    }
+    
+    public function getSlug(): string
+    {
+        return $this->slug;
+    }
+
+    public function getCategoryId(): int
+    {
+        return $this->category;
+    }
+
     public function rules()
     {
         return [            
@@ -21,7 +40,9 @@ class StoreTagRequest extends FormRequest
                 'required',
                 'string',
                 Rule::unique('tags', 'slug')->ignore($this->tag?->id)
-            ],        
+            ],
+            'category' => 'required|numeric|exists:categories,id',
+            'active' => 'required|boolean'        
         ];
     }
 

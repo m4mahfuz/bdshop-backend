@@ -15,9 +15,15 @@ return new class extends Migration
     {
         Schema::create('tags', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();           
+            $table->string('name')->unique();         
             $table->string('slug')->unique();
             $table->boolean('active')->default(true);
+
+            $table->foreignId('category_id')
+                ->index()
+                ->constrained()
+                ->onDelete('cascade');
+
             $table->timestamps();
         });
     }

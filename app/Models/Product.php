@@ -26,15 +26,6 @@ class Product extends Model
         // 'sku',
         'category_id',
     ];
-    // private $price;
-    // private $salePrice;
-    // private $discountAmount;
-    // private $discountLimit;
-    // private $discountAmount;
-    // // private $discountRate;
-    // private $minimumSpending;
-    // private $productStock;
-    // protected $discountedCategory;
 
     protected $casts  = [
         'active' => 'boolean'

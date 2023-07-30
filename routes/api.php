@@ -53,6 +53,7 @@ use App\Http\Controllers\{
     Admin\OrderReportController as AdminOrderReportController,
     Admin\ProductReportController as AdminProductReportController,
     Admin\SlideController as AdminSlideController,
+    Admin\TagController as AdminTagController,
     Admin\TypeController as AdminTypeController,
     Admin\UserController as AdminUserController,
     Admin\UserReportController as AdminUserReportController,
@@ -88,6 +89,9 @@ Route::prefix('admin')->group(function () {
         //Slides
         Route::apiResource('/slides', AdminSlideController::class);
 
+        // Tags...
+        Route::apiResource('/tags', AdminTagController::class);
+        Route::get('/tags/categories/{id}', [AdminTagController::class, 'tagsByCategory']);
         //Report
         Route::get('/reports/users/registered/{period}', [AdminUserReportController::class, 'usersRegisteredFor']);
 

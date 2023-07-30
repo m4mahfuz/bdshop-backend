@@ -34,12 +34,14 @@ class ProductController extends Controller
             'category:id,name,slug', 
             'featuredImage:id,name'
         ])->orderBy('slug')->cursorPaginate(15);//->get();
-
-        // return [
-        //     // 'data' => ProductResource::collection($products),
-        //     'data' => ProductResource::collection($products->cursorPaginate(10)),
-        // ];
-        return new ProductCollection($products);
+        
+        return (new ProductCollection($products))->additional(
+            [
+                'meta' => [
+                    'totalProducts' => Product::count(), //
+                ]
+            ]
+        );
     }
     
     public function store(StoreProductRequest $request)

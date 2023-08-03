@@ -236,9 +236,6 @@ Route::apiResource('/coupons',  CouponController::class);
 // Discounts 
 Route::apiResource('/discounts', DiscountController::class);
 
-// Tags...
-Route::apiResource('/tags', TagController::class);
-
 //Category
 Route::apiResource('categories', CategoryController::class);
 
@@ -253,6 +250,9 @@ Route::post('products/coupon', [ProductController::class, 'apply'])->middleware(
 Route::post('products/toggle-wishlist', [ProductController::class, 'toggleWishlist'])->middleware(['auth:sanctum']);
 
 Route::get('/categories/{category}/products', [CategoryProductController::class, 'index'])->name('category/products.index');
+
+//tagProducts
+Route::get('/tags/{tag}/products', [TagController::class, 'show']);
 // Route::get('products/deals/daily', ProductDealController::class);
 
 // Products Tags

@@ -31,9 +31,8 @@ class ProductResource extends JsonResource
           'quantity' => $this->inventory->quantity,
           'sku' => $this->inventory->sku,
           'wishlistCount' => $this->wishlistByUser()? $this->wishlistByUser()->count() : 0,
-          // 'categories' => CategoryResource::collection($this->whenLoaded('categories')),
-          // 'inventory' => InventoryResource::make($this->whenLoaded('inventory')),
           'category' => CategoryResource::make($this->whenLoaded('category')),
+          
           'discount' => DiscountResource::make($this->whenLoaded('discount')),    
           'images' => ImageResource::collection($this->whenLoaded('images')),
           'tags' => TagResource::collection($this->whenLoaded('tags')),

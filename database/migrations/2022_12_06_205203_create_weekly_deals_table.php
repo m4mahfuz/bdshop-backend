@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('weekly_deals', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('product_id');
-            $table->decimal('price', $precision = 8, $scale = 2);
+            // $table->decimal('price', $precision = 8, $scale = 2);
             $table->boolean('active')->default(true);
             $table->timestamps();
         });

@@ -170,47 +170,25 @@ class Product extends Model
 
     public function dealPrice()
     {
-        // $dealType = session('dealType');
+        $dealType = session('dealType');
         
         $today = date("Y-m-d");
 
-        // if ($dealType === 'daily') {
+        
+            if ($dealType === 'daily') {
 
-            // $dailyDealProduct = $this->whereHas('dailyDeal', function(Builder $query) {
-            //     $query->where('active', true);
-            // })->first();
-        ////////////////////////////////////
-            // $dailyDealProduct = $this->whereHas('dailyDeal', function(Builder $query) use ($today) {
-            //     $query->where('active', true)
-            //     ->whereHas('deal', function(Builder $qry) use ($today) {
-            //     $qry->where('starting', '<=', $today)
-            //         ->where('ending', '>=', $today);
-            //     });
-            // })->first();
-            $dailyDealProduct = $this->getActiveDealType('dailyDeal');
-            if ($dailyDealProduct) {
-                return $this->dailyDeal?->deal->getPrice();
+                $dailyDealProduct = $this->getActiveDealType('dailyDeal');
+                if ($dailyDealProduct) {
+                    return $this->dailyDeal?->deal->getPrice();
+                }
+            } else {
+
+                $weeklyDealProduct = $this->getActiveDealType('weeklyDeal');
+
+                if ($weeklyDealProduct) {
+                    return $this->weeklyDeal?->deal->getPrice();
+                }
             }
-        // }
-
-        // if ($dealType === 'weekly') {
-            // $weeklyDealProduct = $this->whereHas('weeklyDeal', function(Builder $query) {
-            //     $query->where('active', true);
-            // })->first();
-            ////////////////////////////////////////////
-            // $weeklyDealProduct = $this->whereHas('weeklyDeal', function(Builder $query) use ($today) {
-            //     $query->where('active', true)
-            //     ->whereHas('deal', function(Builder $qry) use ($today) {
-            //     $qry->where('starting', '<=', $today)
-            //         ->where('ending', '>=', $today);
-            //     });
-            // })->first();
-            $weeklyDealProduct = $this->getActiveDealType('weeklyDeal');
-
-            if ($weeklyDealProduct) {
-                return $this->weeklyDeal?->deal->getPrice();
-            }
-        // }
 
         return null;
     }

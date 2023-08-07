@@ -22,7 +22,7 @@ class DailyDealController extends Controller
                 ->where('ending', '>=', $today);
         })
         ->with([
-            // 'product.category',
+            'product.category',
             'product.featuredImage',          
         ])->get();
         

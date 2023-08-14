@@ -23,6 +23,8 @@ use App\Http\Controllers\{
     WeeklyDealController,
     DeviceController,
     DiscountController,
+    DivisionController,
+    DistrictController,
     FirebaseNotificationController,
     ImageController,
     InventoryController,
@@ -37,6 +39,7 @@ use App\Http\Controllers\{
     ProductImageController,
     ProductSearchController,
     ProductTagController,
+    ShippingController,
     ShippingTypeController,
     ShipperController,
     SlideController,
@@ -53,6 +56,9 @@ use App\Http\Controllers\{
     Admin\OrderReportController as AdminOrderReportController,
     Admin\ProductReportController as AdminProductReportController,
     Admin\SlideController as AdminSlideController,
+    Admin\ShippingController as AdminShippingController,
+    Admin\ShippingTypeController as AdminShippingTypeController,
+    Admin\ShippingChargeController as AdminShippingChargeController,
     Admin\TagController as AdminTagController,
     Admin\TypeController as AdminTypeController,
     Admin\UserController as AdminUserController,
@@ -126,6 +132,12 @@ Route::prefix('admin')->group(function () {
         //Types
         Route::apiResource('types', AdminTypeController::class);
 
+        // //Shipping Cities
+        Route::apiResource('shippings', AdminShippingController::class);
+        Route::patch('/shippings/types/{shipping}', [AdminShippingTypeController::class, 'update']);
+        Route::patch('/shippings/charges/{shipping}', [AdminShippingChargeController::class, 'update']);
+        
+
         //Categories Icon/Image
         // Route::delete('/categories/{category}/icons/{name}', [CategoryController::class, 'destroyIcon']);
         Route::delete('/categories/{category}/icon', [CategoryController::class, 'destroyIcon']);
@@ -142,9 +154,11 @@ Route::prefix('admin')->group(function () {
         Route::delete('/invites/{invite}', [
             InviteController::class, 'destroy'])->middleware(['type:super-admin']);
         // Route::get('accept/{token}', [InviteController::class, 'accept'])->name('accept');
-        
+
+        Route::get('/divisions', DivisionController::class);
+        Route::get('/districts', DistrictController::class);
     });
-    
+        
     Route::get('/invite/{token}', [
             InviteController::class, 'show']);
     
@@ -203,6 +217,9 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
     
     //ShippingTypes
     Route::get('/shipping-types', [ShippingTypeController::class, 'shippingTypesByCity']);
+    
+    // Shipping Cities
+    Route::get('/shipping-cities', ShippingController::class);
 });
 
 // Route::apiResource('/wishlists', WishlistController::class);

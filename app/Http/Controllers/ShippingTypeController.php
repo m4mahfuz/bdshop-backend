@@ -12,10 +12,7 @@ class ShippingTypeController extends Controller
     public function shippingTypesByCity(Request $request)
     {
         $shipping = Shipping::byCity($request->input('city'));
-        // $shippingTypes = $shipping->shippingTypes('active');
         $shippingTypes = $shipping->shippingTypes()->active()->get();
-
-        // 'shipping_types' => ShippingTypeResource::collection($shippingTypes),
 
         return response([
             'data' => ShippingTypeResource::collection($shippingTypes->load(['shippingCharge' => function($query) {

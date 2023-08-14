@@ -21,9 +21,6 @@ class TagResource extends JsonResource
             'slug' => $this->slug,
             'active' => $this->active,
             'category' => CategoryResource::make($this->whenLoaded('category')),
-            // 'description' => $this->description,
-            // 'parent_id' => $this->parent_id,
-            // 'children' => $this->whenLoaded('children'),
             'products' => ProductResource::collection($this->whenLoaded('products')),
             'productCount' => $this->products->count(),
         ];

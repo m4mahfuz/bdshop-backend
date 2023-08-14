@@ -9,7 +9,6 @@ class ShippingTypeResource extends JsonResource
     
     public function toArray($request)
     {
-        // return parent::toArray($request);
         return [
             'id' => $this->id,
             'active' => $this->active,
@@ -19,9 +18,6 @@ class ShippingTypeResource extends JsonResource
             'delivery_time_max' => $this->delivery_time_max,
             'delivery_time_unit' => $this->deliveryTimeUnit(), 
             'shipping_charge' => ShippingChargeResource::make($this->whenLoaded('shippingCharge'))
-            // 'shipping_charge' => $this->shippingCharge->charge,
-            // 'shipping_charge_active' => $this->shippingCharge->active,
-            
         ];
     }
 }

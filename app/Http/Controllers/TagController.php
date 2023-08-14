@@ -11,16 +11,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class TagController extends Controller
-{
-    // public function __construct()
-    // {
-    //     $this->middleware([
-    //         'auth:admin',
-    //         'type:super-admin,admin'
-    //     ])->except('index', 'show');
-    // }
-
-                // 'discount.deduct',
+{    
     public function show(Tag $tag)
     {
         $products = $tag->products()->with([
@@ -30,7 +21,4 @@ class TagController extends Controller
 
         return (new ProductCollection($products));
     }
-
-   
-
 }

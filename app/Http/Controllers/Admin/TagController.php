@@ -20,8 +20,6 @@ class TagController extends Controller
         $this->tag = $tag;
     }
     
-
-
     public function index()
     {        
         $tags = Tag::with([

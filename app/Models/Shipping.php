@@ -14,10 +14,6 @@ class Shipping extends Model
         'active' => 'boolean',
     ];
 
-    // public function shipments()
-    // {
-    //     return $this->hasMany(Shipment::class);
-    // }
     public function shippingTypes()
     {        
         return $this->hasMany(ShippingType::class);

@@ -18,6 +18,7 @@ use App\Http\Controllers\{
     CartController,
     CategoryController,
     CategoryProductController,
+    ContactController,
     CouponController,
     DailyDealController,
     WeeklyDealController,
@@ -48,6 +49,7 @@ use App\Http\Controllers\{
     WishlistController,
     OrderStatusController as AdminOrderStatusController,
     Admin\CategoryProductController as AdminCategoryProductController,
+    Admin\ContactController as AdminContactController,
     Admin\DiscountController as AdminDiscountController,
     Admin\DailyDealController as AdminDailyDealController,
     Admin\OfferController as AdminOfferController,
@@ -84,7 +86,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/orders/{order}/logs', [AdminOrderController::class, 'orderLogsBy']);
         Route::patch('/orders/update-status/{order}', [AdminOrderController::class, 'updateOderStatus']);
 
-        Route::apiResource('/orders', AdminOrderController::class);
+        Route::apiResource('/orders', AdminOrderController::class);        
 
         /// Order Status
         Route::apiResource('/order/statuses', AdminOrderStatusController::class);
@@ -157,6 +159,9 @@ Route::prefix('admin')->group(function () {
 
         Route::get('/divisions', DivisionController::class);
         Route::get('/districts', DistrictController::class);
+
+        //contacts
+        Route::apiResource('/contacts', AdminContactController::class);
     });
         
     Route::get('/invite/{token}', [
@@ -166,7 +171,7 @@ Route::prefix('admin')->group(function () {
     // User ...
     Route::get('/user', AdminUserController::class)->middleware(['auth:sanctum'])->name('admin.user');
 });
-
+    
     //DailyDeal
     Route::apiResource('daily/deals', DailyDealController::class);
 
@@ -294,4 +299,7 @@ Route::get('/search/items', [ProductSearchController::class, 'index']);
 
 //Slides
 Route::apiResource('/slides', SlideController::class);
+
+//Contact
+Route::post('/contacts', ContactController::class);
 

@@ -13,10 +13,6 @@ class CartResource extends JsonResource
         // $product->initialize($this->product);
 
         return [
-          // 'id' => $this->id,
-          // 'session_id' => $this->session_id,
-          // 'user_id' => $this->user_id,
-          // 'product' => ProductResource::make($this->whenLoaded('product')),
           'id' => $this->product_id,
           'name' => $this->product->name, 
           'unit' => $this->product->unit,

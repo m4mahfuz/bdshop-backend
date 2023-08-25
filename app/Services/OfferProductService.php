@@ -22,7 +22,7 @@ class OfferProductService
 
 				$offer->products()->syncWithoutDetaching([
 					$product->id => [
-						'price' => $product->price,
+						// 'price' => $product->price,
 						'active' => true
 					]
 				]); 

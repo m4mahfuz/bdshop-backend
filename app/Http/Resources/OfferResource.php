@@ -24,6 +24,5 @@ class OfferResource extends JsonResource
             //     'created_at', 'updated_at', 
             // ]))
         ];
-        // return parent::toArray($request);
     }
 }

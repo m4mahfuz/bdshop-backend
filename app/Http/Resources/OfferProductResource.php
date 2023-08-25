@@ -16,6 +16,7 @@ class OfferProductResource extends JsonResource
           'id' => $this->id,
           'name' => $this->name,
           'slug' => $this->slug,          
+          'active' => $this->active,          
           // 'original_price' => round($this->pivot->price),                    
           'original_price' => round($this->price),                    
           'price' => $this->discountedPrice(), //round($this->discountedPrice()),
@@ -26,7 +27,7 @@ class OfferProductResource extends JsonResource
           'category' => CategoryResource::make($this->category),
           // 'tags' => TagResource::collection($this->tags),
           'featured_image' => ImageResource::make($this->featuredImage),        
-          'active' => $this->pivot->active? true: false,
+          'pivot_active' => $this->pivot->active? true: false,
           // 'pivot' => $this->whenLoaded('pivot'),    
         ];
     }

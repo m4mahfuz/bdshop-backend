@@ -15,6 +15,7 @@ use App\Http\Controllers\{
     Auth\RegisterController,    
     Auth\PasswordController, 
     AddressController,
+    BannerController,
     CartController,
     CategoryController,
     CategoryProductController,
@@ -49,6 +50,7 @@ use App\Http\Controllers\{
     WishlistController,
     OrderStatusController as AdminOrderStatusController,
     Admin\CategoryProductController as AdminCategoryProductController,
+    Admin\BannerController as AdminBannerController,
     Admin\ContactController as AdminContactController,
     Admin\DiscountController as AdminDiscountController,
     Admin\DailyDealController as AdminDailyDealController,
@@ -93,6 +95,9 @@ Route::prefix('admin')->group(function () {
         
         //Shippers
         Route::apiResource('/shippers', ShipperController::class);
+
+        //Banners
+        Route::apiResource('/banners', AdminBannerController::class);
 
         //Slides
         Route::apiResource('/slides', AdminSlideController::class);
@@ -296,6 +301,9 @@ Route::apiResource('images', ImageController::class);
 
 //search
 Route::get('/search/items', [ProductSearchController::class, 'index']);
+
+//Banner
+Route::apiResource('/banners', BannerController::class);
 
 //Slides
 Route::apiResource('/slides', SlideController::class);

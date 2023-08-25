@@ -81,23 +81,19 @@ class OfferController extends Controller
 
     public function show(Offer $offer)
     {
-        // if (!$this->user->isAuthorized(['super-admin', 'admin'])) {
-            // $this->authorize('manage', $order);
-        // }
-        
+        // $offer->load([            
+        //     'products'
+        // ]);
         $offer->load([            
-            // 'coupon',
-            // 'products:id,unit,unit_quantity',
-            // 'products.featuredImage',                        
-            // 'products.discount',            
-            'products'
+            'products' => function ($query) {
+                $query->with('featuredImage');
+            }
         ]);
-        $offer->products->each(function($product) {
-            // $product->pivot->disputed;
-            $product->pivot;
-            $product->load('featuredImage');
-            // $product->pivot->load('disputed:id,status,reason,order_product_id');
-        });
+
+        // $offer->products->each(function($product) {
+        //     $product->pivot;
+        //     $product->load('featuredImage');
+        // });
 
         return response(['data' => OfferResource::make($offer)], Response::HTTP_OK);
     }
@@ -115,6 +111,13 @@ class OfferController extends Controller
     {        
         return response([
             'data' => OfferResource::make($this->offer->update($request, $offer))
+        ], Response::HTTP_OK);
+    }
+
+    public function activeOffers()
+    {
+           return response([
+            'data' => OfferResource::collection(Offer::valid()->latest()->get()),
         ], Response::HTTP_OK);
     }
 

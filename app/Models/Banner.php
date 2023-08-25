@@ -5,9 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Slide extends Model
+class Banner extends Model
 {
     use HasFactory;
+
     protected $guarded = [];
     
     protected $casts = [
@@ -24,12 +25,11 @@ class Slide extends Model
         return $this->create($data);
     }
 
-    public function saveImageOf($image, $slide)
+    public function saveImageOf($image, $banner)
     {
-        $slide->image()->create([
+        $banner->image()->create([
             'name' => $image
         ]);
         return;
     }     
-
 }

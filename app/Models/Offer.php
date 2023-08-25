@@ -43,6 +43,18 @@ class Offer extends Model
             ->where('ending', '>=', Carbon::now());
     }
 
+    public function isValidOffer() {
+        // dd($this->id, 
+        //     $this->active == true &&
+        //     $this->starting <= Carbon::now() &&
+        //     $this->ending >= Carbon::now()
+        // );
+        $valid = ($this->active == true &&
+            $this->starting <= Carbon::now() &&
+            $this->ending >= Carbon::now()) ? true : false;
+        return $valid;
+    }
+
     public function convertToReadable($statusValue)
     {
         return collect([

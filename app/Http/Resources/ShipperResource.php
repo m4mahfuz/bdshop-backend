@@ -13,7 +13,7 @@ class ShipperResource extends JsonResource
         // return parent::toArray($request);
         return Arr::except(parent::toArray($request), [
 
-            'active', 'created_at', 'updated_at',          
+            'created_at', 'updated_at',          
         ]);
 
     }

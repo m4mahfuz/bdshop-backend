@@ -7,9 +7,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
     Auth\Admin\LoginController as AdminLoginController,    
     Auth\Admin\LogoutController as AdminLogoutController,    
-    Auth\Admin\RegisterController as AdminRegisterController,    
+    Auth\Admin\RegisterController as AdminRegisterController,        
     Auth\Admin\PasswordController as AdminPasswordController,    
-    Admin\DashboardController as AdminDashboardController,    
+    Admin\DashboardController as AdminDashboardController,            
     Auth\LoginController,
     Auth\LogoutController,
     Auth\RegisterController,    
@@ -41,9 +41,8 @@ use App\Http\Controllers\{
     ProductImageController,
     ProductSearchController,
     ProductTagController,
-    ShippingController,
     ShippingTypeController,
-    ShipperController,
+    ShippingController,
     SlideController,
     TagController,
     UserController,    
@@ -63,6 +62,7 @@ use App\Http\Controllers\{
     Admin\ShippingController as AdminShippingController,
     Admin\ShippingTypeController as AdminShippingTypeController,
     Admin\ShippingChargeController as AdminShippingChargeController,
+    Admin\ShipperController as AdminShipperController,
     Admin\TagController as AdminTagController,
     Admin\TypeController as AdminTypeController,
     Admin\UserController as AdminUserController,
@@ -94,7 +94,7 @@ Route::prefix('admin')->group(function () {
         Route::apiResource('/order/statuses', AdminOrderStatusController::class);
         
         //Shippers
-        Route::apiResource('/shippers', ShipperController::class);
+        Route::apiResource('/shippers', AdminShipperController::class);
 
         //Banners
         Route::apiResource('/banners', AdminBannerController::class);

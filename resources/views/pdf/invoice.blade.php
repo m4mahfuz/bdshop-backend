@@ -124,7 +124,7 @@
                 </td>
 
                 <td style="text-align: right;">
-                  <img src="{{url('/storage/images/logo.png')}}" style="max-width: 80px" />
+                  <img src="{{url('/storage/images/logo.svg')}}" style="max-width: 80px" />
                   <span style="display: block; font-size: 1.10rem; font-weight: 600; padding-top: 0.25rem" class="text-gray-800">
                       Bengal Shop
                   </span>

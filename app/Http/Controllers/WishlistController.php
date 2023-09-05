@@ -16,7 +16,8 @@ class WishlistController extends Controller
         // Auth::loginUsingId(1);
         $wishlist = Wishlist::where('user_id', Auth::user()->id)->with([
             'product',
-        ])->orderBy('id')->paginate(3);
+            'product.featuredImage'
+        ])->orderBy('id')->paginate(10);
 
         return WishlistResource::collection($wishlist);
      

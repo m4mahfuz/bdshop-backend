@@ -59,16 +59,8 @@ class DailyDealController extends Controller
         ], Response::HTTP_CREATED);
     }
 
-    // public function update(Request $request, $deal)
     public function update(StoreDealRequest $request, $deal)
     {        
-        // $request->validate([
-        //     'active' => 'required|boolean',
-        //     'amount_type' => 'required|numeric',
-        //     'amount' => 'required|integer',
-        //     'deal_type' => 'required|string',
-        // ]);
-        
         return response([
             'data' => DailyDealResource::make($this->deal->update($request, $deal))
         ], Response::HTTP_OK);

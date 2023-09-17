@@ -1,19 +1,12 @@
 <?php
 
 use App\Models\Admin;
+use App\Models\DailyDeal;
+use App\Models\WeeklyDeal;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
+use Carbon\Carbon;
 
-/*
-|--------------------------------------------------------------------------
-| Console Routes
-|--------------------------------------------------------------------------
-|
-| This file is where you may define all of your Closure based console
-| commands. Each Closure is bound to a command instance allowing a
-| simple approach to interacting with each command's IO methods.
-|
-*/
 
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
@@ -77,3 +70,44 @@ Artisan::command('log:clear', function() {
         // $this->comment('Logs have been cleared!');
     }
 })->describe('Clear Laravel log');
+
+Artisan::command('deals:daily', function() {
+        
+    $deals = DailyDeal::where('active', true)
+        ->with('deal')
+        ->get();
+
+    if ($deals->isNotEmpty()) {
+
+        foreach ($deals as $deal) {
+            $deal->deal()->update([
+                'amount_type' => $deal->deal->amount_type,
+                'amount' => $deal->deal->amount,
+                'starting' => today(),
+                'ending' => today()->endOfDay(),
+            ]);
+        }
+    }
+    
+})->describe('Set daily deal');
+
+
+Artisan::command('deals:weekly', function() {
+        
+    $deals = WeeklyDeal::where('active', true)
+        ->with('deal')
+        ->get();
+
+    if ($deals->isNotEmpty()) {        
+
+        foreach ($deals as $deal) {
+            $deal->deal()->update([
+                'amount_type' => $deal->deal->amount_type,
+                'amount' => $deal->deal->amount,
+                'starting' => today(),
+                'ending' => today()->addDay(6)->endOfDay(),
+            ]);
+        }
+    }
+    
+})->describe('Set Weekly deal');
